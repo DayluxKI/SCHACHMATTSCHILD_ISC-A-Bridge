@@ -15,9 +15,9 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 
 # Importiere die bestehenden Optimierungen
-from HARDWARE_ABSTRACTION_LAYER import HardwareFabrik, Plattform
-from KI_MODELL_LADELOGIK import ModellManager, YOLOModell, PredictiveMaintenanceModell
-from FORMALE_VERIFIKATION import (
+from src.HARDWARE_ABSTRACTION_LAYER import HardwareFabrik, Plattform
+from src.KI_MODELL_LADELOGIK import ModellManager, YOLOModell, PredictiveMaintenanceModell
+from src.FORMALE_VERIFIKATION import (
     VerifikationsMonitor,
     erstelle_isc_zustandsmaschine,
     ZustandsMaschine,
@@ -25,7 +25,7 @@ from FORMALE_VERIFIKATION import (
 )
 
 # Importiere das neue Modul 14
-from ISC_A_BRIDGE_CONTROLLER import ISCABridgeController, NavigationsModus
+from src.ISC_A_BRIDGE_CONTROLLER import ISCABridgeController, NavigationsModus
 
 logger = logging.getLogger(__name__)
 
