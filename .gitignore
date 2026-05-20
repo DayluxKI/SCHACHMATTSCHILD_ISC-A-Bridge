@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# KI-Modelle (zu groß für Git)
+modelle/*.pt
+modelle/*.pth
+modelle/*.onnx
+modelle/*.pkl
+modelle/*.engine
+
+# Logs
+logs/
+*.log
+
+# Umgebung
+.env
+.venv
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+
+# Sensible Daten
+config_produktion.json
+secrets.json

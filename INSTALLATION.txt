@@ -1,0 +1,98 @@
+================================================================
+SCHACHMATTSCHILD – Optimierungen v2.0
+Alle drei Optimierungen auf einen Blick
+================================================================
+
+NEUE DATEIEN:
+-------------
+1. HARDWARE_ABSTRACTION_LAYER.py  – Optimierung 1
+2. KI_MODELL_LADELOGIK.py         – Optimierung 2
+3. FORMALE_VERIFIKATION.py        – Optimierung 3
+
+================================================================
+OPTIMIERUNG 1: Hardware-Abstraktion
+----------------------------------------------------------------
+Was neu ist:
+  - Automatische Plattformerkennung (Raspberry Pi / Jetson / x86)
+  - Echte GPIO-Anbindung (RPi.GPIO)
+  - Pixhawk/ArduPilot Integration via MAVLink
+  - Kamera: PiCamera2, Jetson GStreamer, USB-Fallback
+  - Simulation für Entwicklung ohne echte Hardware
+
+Installation:
+  pip install RPi.GPIO          # Raspberry Pi GPIO
+  pip install dronekit          # Pixhawk/ArduPilot
+  pip install pymavlink         # MAVLink Protokoll
+  pip install picamera2         # Raspberry Pi Kamera
+  pip install sounddevice       # Audio
+
+Verwendung:
+  from HARDWARE_ABSTRACTION_LAYER import HardwareFabrik
+  fabrik = HardwareFabrik()
+  gpio = fabrik.gpio()
+  drohne = fabrik.drohne('/dev/ttyUSB0')  # Pixhawk USB
+  drohne = fabrik.drohne()               # Simulation
+
+================================================================
+OPTIMIERUNG 2: KI-Modell Ladelogik
+----------------------------------------------------------------
+Was neu ist:
+  - Automatisches Laden von .pt / .pth / .onnx Dateien
+  - Fallback auf Standard-Modell wenn Datei fehlt
+  - Modell-Validierung vor Nutzung (MD5-Hash)
+  - GPU/CPU/MPS automatische Erkennung
+  - Zentraler ModellManager (Singleton)
+
+Installation:
+  pip install ultralytics        # YOLO Modelle
+  pip install scikit-learn       # Random Forest
+  pip install torch torchvision  # PyTorch
+
+Verwendung:
+  from KI_MODELL_LADELOGIK import ModellManager, YOLOModell
+  manager = ModellManager()
+  yolo = YOLOModell("modelle/yolo_drohnen.pt")
+  manager.registriere('yolo', yolo)
+  manager.lade_alle()
+  ergebnis = yolo.inferenz(frame)
+
+================================================================
+OPTIMIERUNG 3: Formale Verifikation
+----------------------------------------------------------------
+Was neu ist:
+  - Design-by-Contract (Vor- und Nachbedingungen)
+  - 5 formale Sicherheitseigenschaften (S1-S5)
+  - Verifizierte ISC V4.0 Zustandsmaschine
+  - Nur explizit erlaubte Übergänge möglich
+  - Laufzeit-Verifikationsmonitor
+
+Sicherheitseigenschaften:
+  S1: Keine Aktion ohne validierte Realität
+  S2: Jede Entscheidung muss protokolliert sein
+  S3: Mindestens 2 unabhängige Referenzquellen
+  S4: Notfall-Stop immer verfügbar
+  S5: Kein Angriff auf Freund-Objekte (Friendly Fire)
+
+Verwendung:
+  from FORMALE_VERIFIKATION import (
+      erstelle_isc_zustandsmaschine,
+      VerifikationsMonitor
+  )
+  maschine = erstelle_isc_zustandsmaschine()
+  maschine.uebergang('INITIALISIERUNG')
+  maschine.uebergang('NORMALBETRIEB')
+
+  monitor = VerifikationsMonitor()
+  ok = monitor.pruefe_zustand(system_zustand)
+
+================================================================
+GESAMT-INSTALLATION:
+  pip install RPi.GPIO dronekit pymavlink picamera2
+  pip install sounddevice ultralytics scikit-learn
+  pip install torch torchvision
+
+================================================================
+ERFINDER: Dmitrij Medkov
+E-Mail:   medkov@web.de
+Version:  2.0 – Mai 2026
+================================================================
